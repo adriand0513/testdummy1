@@ -6,11 +6,12 @@ class Node:
         self.next = None
 
 # create a LinkedList class
-class LinkedList:
+class Linked_List:
     
     # instantialize the first node 'self.head' to none because it has no "current" value in the beginning
     def __init__(self):
         self.head = None
+
 
     # create a display method to display the linked list on the terminal 
     def display(self):
@@ -22,6 +23,7 @@ class LinkedList:
             current = current.next
         # print "None" for when there is no data or there is no more nodes that holds a value
         print("None")
+
 
     # create a add last method 
     def append(self, data):
@@ -37,6 +39,8 @@ class LinkedList:
             current = current.next
         # set the new node to very last node
         current.next = new_node
+
+
     # create a insert in the beginning method
     def insert_at_beginning(self, data):
         # create a new Node object
@@ -45,3 +49,79 @@ class LinkedList:
         new_node.next = self.head
         # set the new node to the first node
         self.head = new_node
+
+
+    def index(self, target):
+        # set current to the first node
+        current = self.head
+        # set index to 0 for it is the index of the first node
+        index = 0
+        # traverse the list
+        while current:
+            if current.data == target:
+                return index
+            current = current.next
+            index += 1
+        return -1
+    
+    
+    def remove_first(self):
+        # if it is not the first node, do nothing, return 
+        if not self.head:
+            return
+        # set the first node to the next node from the value you are removing/deleting.m, m, 
+        self.head = self.head.next
+
+
+    def remove_last(self):
+        if self.head == None:
+            raise Exception("Cannot delete from an empty list")
+        if not self.head.next:
+            self.head = None
+        else:
+            current = self.head
+            while current.next.next:
+                current = current.next
+            current.next = None
+
+    
+    # create a size method
+    def size(self):
+        count = 0
+        current = self.head
+        while current:
+            count += 1
+            current = current.next
+        return count
+    
+    def to_array(self):
+        # initialize the empty list with the elements of the linked list
+        array_representation = []
+        # start from the head of the list
+        current = self.head
+        # traverse the list
+        while current:
+            # append the value of the current node
+            array_representation.append(current.data)
+            # move on to the next node
+            current = current.next
+        # return the resulting list displaying the linked list as an array
+        return array_representation
+    
+
+    def reversed(self):
+        # initialize the variables to keep track of the previous and current nodes
+        previous = None
+        current = self.head
+        # traverse the list and reverse the links between nodes
+        while current:
+            # store the next node temporarily to current.next
+            next_node = current.next
+            # reverse the link by pointing the current nodes next to the previous node
+            current.next = previous
+            # Move to the next pair of nodes
+            previous = current
+            current = next_node
+        # update the head of the linked list to the last node, which is the first node of the reversed list
+        self.head = previous
+
