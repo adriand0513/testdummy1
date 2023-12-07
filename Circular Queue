@@ -1,0 +1,55 @@
+class CircularQueue:
+	#intialize the class with the size, queue with no value, and both front and rear set to -1 to indicate the queue is empty
+	def __init__(self):
+		self.size = size
+		self.queue = [None] * size
+		self.front = self.rear = -1
+		
+	def is_empty(self):
+		return self.front == -1
+		
+	def is_full(self):
+		# this checks to see if the next position after rear is the front
+		return (self.rear + 1) % self.size == self.front
+		
+	def enqueue(self, item):
+		# check if the queue is full
+		if self.is_full():
+			print("Queue is full. Cannot enqueue.")
+			return
+		# check if the queue is empty
+		elif self.is_empty():
+			self.front = self.rear = 0 
+		# increment self.rear by 1 and assign that item to that position in the queue
+		else:
+			self.rear = (self.rear + 1) % self.size 
+		self.queue[self.rear] = item
+		
+	def dequeue(self):
+		# check if the queue is empty
+		if self.is_empty():
+			print("Queue is empty. Cannot dequeue.")
+			return None
+		# check if the queue only has one item
+		elif self.front == self.rear:
+			item = self.queue[self.front]
+			self.front = self.rear = -1
+			return item
+		# if there is more than one item, increment self.front by 1
+		else:
+			item = self.queue[self.front]
+			self.front = (self.front + 1) % self.size
+			return item
+			
+	def display(self):
+		# check if the queue is empty
+		if self.is_empty():
+			print("Queue is empty.")
+			return
+		# check if the front is less than or equal to self.rear, print the elements from self.front to self.rear
+		elif self.front <= self.rear:
+			print("Circular Queue:", self.queue[self.front:self.rear + 1])
+		else:
+			print("Circular Queue:", self.queue[self.front] + self.queue[:self.rear + 1])
+	
+
