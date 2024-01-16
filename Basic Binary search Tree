@@ -1,0 +1,31 @@
+# building a basic binary search tree
+# define the structure of a Node in the binary search tree
+class Node:
+	def __init__(self, key):
+		self.key = key   	# value of the node
+		self.left = None	# Pointer to the left child
+		self.right = None				# Pointer to the right child
+		
+		
+# Function to insert a key into the binary search tree	
+def insert(root, key):
+	# if the tree is empty, create a new node	
+	if root is None:
+		return Node(key)
+	else:
+		# if the key is smaller than the root's key, go to the left subtree
+		if key < root.key:
+			root.left = insert(root.left, key)
+		else:
+			root.right = insert(root.right, key)
+	return root
+		
+# function to perform an inorder traversal of the binary search tree
+def inorder_traversal(root):
+	if root:
+		# traverse the left subtree
+		inorder_traversal(root.left)
+		# print the current node's key
+		print(root.key, end=" ")
+		# traverse the right subtree	 
+		inorder_traversal(root.right)
